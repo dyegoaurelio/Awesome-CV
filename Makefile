@@ -9,19 +9,19 @@ PT_OUTPUT_DIR = '$(PT_DIR)/out'
 
 build: en-us pt-br
 
-en-us: example_build example_clean_logs
+en-us: en-us_build en-us_clean_logs
 
 pt-br: pt-br_build pt-br_clean_logs
 
-clean: example_clean pt-br_clean
+clean: en-us_clean pt-br_clean
 
-example_clean_logs:
+en-us_clean_logs:
 	find $(EN_OUTPUT_DIR) -type f ! -name '*.pdf' -exec rm -vf {} \;
 
-example_build:
+en-us_build:
 	find $(EN_DIR) -maxdepth 1 -type f -name '*.tex' -exec $(CC) -output-directory=$(EN_OUTPUT_DIR) {} \;
 
-example_clean:
+en-us_clean:
 	rm -vrf $(EN_OUTPUT_DIR)/*.pdf
 
 pt-br_clean_logs:
