@@ -1,28 +1,28 @@
 .PHONY: build
 
 CC = xelatex
-EXAMPLES_DIR = examples
-EXAMPLES_OUTPUT_DIR = '$(EXAMPLES_DIR)/out'
+EN_DIR = en-us
+EN_OUTPUT_DIR = '$(EN_DIR)/out'
 
 PT_DIR = pt-br
 PT_OUTPUT_DIR = '$(PT_DIR)/out'
 
-build: examples pt-br
+build: en-us pt-br
 
-examples: example_build example_clean_logs
+en-us: example_build example_clean_logs
 
 pt-br: pt-br_build pt-br_clean_logs
 
 clean: example_clean pt-br_clean
 
 example_clean_logs:
-	find $(EXAMPLES_OUTPUT_DIR) -type f ! -name '*.pdf' -exec rm -vf {} \;
+	find $(EN_OUTPUT_DIR) -type f ! -name '*.pdf' -exec rm -vf {} \;
 
 example_build:
-	find $(EXAMPLES_DIR) -maxdepth 1 -type f -name '*.tex' -exec $(CC) -output-directory=$(EXAMPLES_OUTPUT_DIR) {} \;
+	find $(EN_DIR) -maxdepth 1 -type f -name '*.tex' -exec $(CC) -output-directory=$(EN_OUTPUT_DIR) {} \;
 
 example_clean:
-	rm -vrf $(EXAMPLES_OUTPUT_DIR)/*.pdf
+	rm -vrf $(EN_OUTPUT_DIR)/*.pdf
 
 pt-br_clean_logs:
 	find $(PT_OUTPUT_DIR) -type f ! -name '*.pdf' -exec rm -vf {} \;
